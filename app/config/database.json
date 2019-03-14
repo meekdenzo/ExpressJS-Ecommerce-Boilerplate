@@ -1,0 +1,30 @@
+{
+  "development": {
+    "username": "root",
+    "password": "admin",
+    "database": "tshirtshop",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": false,
+    "define": {
+      "underscored": true,
+      "timestamps": false,
+      "freezeTableName": true
+    }
+  },
+  "test": {
+    "username": "root",
+    "password": "admin",
+    "database": "tshirtshop",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "admin",
+    "database": "tshirtshop",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": false
+  }
+}

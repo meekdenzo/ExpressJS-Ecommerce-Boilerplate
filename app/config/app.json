@@ -1,0 +1,16 @@
+{
+  "passkey": "QSjqNmRDf8vPRXvxOXDLz7OGyIhl5t1yvPRXvxOXDLz7Ohl5t1yvPRXvxO",
+  "PAYPAL_CONFIG": {
+    "mode": "sandbox",
+    "client_id": "AU0VXaNph92-ZUpkvGn7f-YTdDZR9PWQZ6EfahzJZMxk0jFIGv7I5QZwipB6F-6Vf-4C07ksscGoIQEt",
+    "client_secret": "EIq8YGhclX1Rk51BK9pakIJmTntwoat2e_AKAltsN_KBMr86VCHGxGnh5_r5f5mIuIkxgPzOBWG4P__7",
+    "return_url": "http://paypal.test?status=success",
+    "cancel_url": "http://paypal.test?status=cancel"
+  },
+  "FACEBOOK_CONFIG": {
+    "clientID": "187290118553033",
+    "clientSecret": "e6afddf0a9f1d8c7119b922f58f3a59f",
+    "callbackURL": "http://localhost:3000/users/facebook/callback"
+  },
+  "EMAIl": "codeninja.geez-facilitator@gmail.com"
+}
