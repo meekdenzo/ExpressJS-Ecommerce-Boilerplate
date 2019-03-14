@@ -4,7 +4,7 @@
   "description": "E-commerce T-Shirt Shop",
   "main": "server.js",
   "scripts": {
-    "server": "nodemon app/server.js"
+    "start": "nodemon app/server.js"
   },
   "keywords": [
     "e-commerce",
@@ -39,5 +39,9 @@
     "eslint": "^5.15.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codeninja0x01/E-commerce-Turing"
   }
 }
