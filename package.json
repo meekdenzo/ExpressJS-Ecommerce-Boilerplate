@@ -4,7 +4,7 @@
   "description": "E-commerce T-Shirt Shop",
   "main": "server.js",
   "scripts": {
-    "server": "nodemon app/server.js"
+    "start": "nodemon app/server.js"
   },
   "keywords": [
     "e-commerce",
