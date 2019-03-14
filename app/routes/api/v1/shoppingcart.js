@@ -5,7 +5,13 @@ const passport = require('passport');
 const request = require('request-promise');
 const { promisify } = require('util');
 const redis = require('redis');
-const client = redis.createClient();
+const client = redis.createClient({
+  hoste: c2-52-204-115-3.compute-1.amazonaws.com
+  user: h
+  port: 31959
+  password: p8c64275a68421ac2bbdb78a3f1b3a9d9af7442def281235a09a4263b9ddded49
+  uri: redis://h:p8c64275a68421ac2bbdb78a3f1b3a9d9af7442def281235a09a4263b9ddded49@ec2-52-204-115-3.compute-1.amazonaws.com:31959
+});
 const gethAsync = promisify(client.hgetall).bind(client);
 
 const { PAYPAL_CONFIG } = require(appRoot + '/app/config/app.json');
