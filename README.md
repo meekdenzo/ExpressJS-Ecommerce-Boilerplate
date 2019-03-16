@@ -134,6 +134,13 @@ Response from server
 
 `{ "success": true, "token": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImNvZGVuaW5qYTB4MDFAZ21haWwuY29tIiwiaWF0IjoxNTUyNzU4NTc4LCJleHAiOjE1NTI3NjIxNzh9.tABe3TaV1TmnZ9ol3LDo18CcDwPLQsbOyDJ1A-Zk3WU" }`
 
+## Pagination
+
+All GET Request support query
+
+- limit
+- offset
+
 ### Tech
 
 This project uses a number of open source projects to work properly:
