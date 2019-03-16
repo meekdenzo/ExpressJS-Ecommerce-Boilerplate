@@ -22,6 +22,82 @@ T-shirt shopp is an e-commerce system which allows users to search, add items to
 - Use winston for Logging the app
 - Hosted on heroku (https://tshirt-turing.herokuapp.com)
 
+# Available REST API
+
+Replace :id or :cartId placeholder with appropriate id
+
+Category
+
+- (PUBLIC) GET https://tshirt-turing.herokuapp.com/api/v1/categories
+- (PUBLIC) GET https://tshirt-turing.herokuapp.com/api/v1/categories/1/products
+- (PUBLIC) GET https://tshirt-turing.herokuapp.com/api/v1/categories/department/:id
+- (PUBLIC) GET https://tshirt-turing.herokuapp.com/api/v1/categories/:id
+- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/categories
+- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/categories/:id
+- (PROTECTED) DELETE https://tshirt-turing.herokuapp.com/api/v1/categories/:id
+
+Customer
+
+- (PROTECTED) GET https://tshirt-turing.herokuapp.com/api/v1/customers/:id
+- (PROTECTED) GET https://tshirt-turing.herokuapp.com/api/v1/customers
+- (PROTECTED) GET https://tshirt-turing.herokuapp.com/api/v1/customers/shippping/region
+- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/customers/update
+- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/customers/address
+
+Department
+
+- (PUBLIC) GET https://tshirt-turing.herokuapp.com/api/v1/departments
+- (PUBLIC) GET https://tshirt-turing.herokuapp.com/api/v1/departments/:id
+- (PUBLIC) POST https://tshirt-turing.herokuapp.com/api/v1/departments
+- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/departments/:id
+- (PROTECTED) DELETE https://tshirt-turing.herokuapp.com/api/v1/departments/:id
+
+Order
+
+- (PROTECTED) GET https://tshirt-turing.herokuapp.com/api/v1/orders/:id
+- (PROTECTED) GET https://tshirt-turing.herokuapp.com/api/v1/orders/:id/details
+- (PROTECTED) https://tshirt-turing.herokuapp.com/api/v1/orders/customer/:id
+- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/orders/:id
+- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/orders/:id/shippped
+
+Product
+
+- (PUBLIC) GET https://tshirt-turing.herokuapp.com/api/v1/products/:id/attribute
+- (PUBLIC) GET https://tshirt-turing.herokuapp.com/api/v1/products/:id/category
+- (PUBLIC) GET https://tshirt-turing.herokuapp.com/api/v1/products/:id
+- (PUBLIC) GET https://tshirt-turing.herokuapp.com/api/v1/products/:id/location
+- (PUBLIC) GET https://tshirt-turing.herokuapp.com/api/v1/products/:id/review
+- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/products/:id/attribute
+- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/products/:id/category
+- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/products/:id/review
+- (PROTECTED) DELETE https://tshirt-turing.herokuapp.com/api/v1/products/:id
+
+Shoppingcart
+
+- (PROTECTED) GET https://tshirt-turing.herokuapp.com/api/v1/carts/:cartId/saved
+- (PROTECTED) GET https://tshirt-turing.herokuapp.com/api/v1/carts/:cartId/products
+- (PROTECTED) GET https://tshirt-turing.herokuapp.com/api/v1/carts/:cartId/amount
+- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/carts
+- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/carts/create-payment
+- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/carts/execute-payment
+
+User
+
+- (PROTECTED) GET https://tshirt-turing.herokuapp.com/api/v1/users/current
+- (PROTECTED) GET https://tshirt-turing.herokuapp.com/api/v1/users/:id
+- (PROTECTED) GET https://tshirt-turing.herokuapp.com/api/v1/users/facebook/callback
+- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/users/
+- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/users/signin
+- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/users/update
+
+## Response Structure
+
+- SUCCESS FETCH return data with header status 200 `{ data: }`
+- SUCCESS UPDATE, CREATE or DELETE return json with with header status 422 `{message: 'SUCCESS'}`
+- ERROR FETCH return json with header status 404 `{message: 'NOTFOUND' }`
+- ERROR CREATE or UPDATE return json with header status 422 `{ "errors": [ { "location": "body", "param": "name", "msg": "Name is a required field." } ] }`
+- ERROR unauthorized user return `Unauthorized` string
+
 ### Tech
 
 This project uses a number of open source projects to work properly:
