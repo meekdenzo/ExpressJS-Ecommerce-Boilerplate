@@ -98,6 +98,42 @@ User
 - ERROR CREATE or UPDATE return json with header status 422 `{ "errors": [ { "location": "body", "param": "name", "msg": "Name is a required field." } ] }`
 - ERROR unauthorized user return `Unauthorized` string
 
+## Authentication
+
+Request for reactJS
+
+```
+const signinUserRequest = async ({email, password}) =>
+    await axios
+    .post(`https://tshirt-turing.herokuapp.com/api/v1/users/signin/auth/signin`, { email, password })
+    .then(response => response.data)
+    .catch(error => error.response.data);
+
+function* signinUser({ payload }) {
+    const { history, user } = payload;
+    try {
+        const { token } = yield call(signinUserRequest, user);
+        if (token) {
+            const decodedToken = jwtDecode(token);
+            setHeaderAuthToken(token);
+            saveAuthToken(token);
+            yield put(setAuthToken(token));
+            yield put(authSuccess(decodedToken));
+            yield put({type: CURRENT_USER})
+            history.push("/");
+        } else {
+            yield put(authError(signinUser));
+        }
+    } catch (error) {
+        console.log("signin failed :", error.message);
+    }
+}
+```
+
+Response from server
+
+`{ "success": true, "token": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImNvZGVuaW5qYTB4MDFAZ21haWwuY29tIiwiaWF0IjoxNTUyNzU4NTc4LCJleHAiOjE1NTI3NjIxNzh9.tABe3TaV1TmnZ9ol3LDo18CcDwPLQsbOyDJ1A-Zk3WU" }`
+
 ### Tech
 
 This project uses a number of open source projects to work properly:
