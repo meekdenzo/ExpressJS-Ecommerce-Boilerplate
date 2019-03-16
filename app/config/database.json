@@ -25,6 +25,11 @@
     "database": "heroku_5a68c80e05d21f3",
     "host": "us-cdbr-iron-east-03.cleardb.net",
     "dialect": "mysql",
-    "operatorsAliases": false
+    "operatorsAliases": false,
+    "define": {
+      "underscored": true,
+      "timestamps": false,
+      "freezeTableName": true
+    }
   }
 }
