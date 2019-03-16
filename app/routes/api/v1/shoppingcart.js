@@ -4,9 +4,18 @@ const appRoot = require('app-root-path');
 const passport = require('passport');
 const request = require('request-promise');
 const { promisify } = require('util');
-const redis = require('redis');
-const client = redis.createClient();
-const gethAsync = promisify(client.hgetall).bind(client);
+
+if (process.env.REDISTOGO_URL) {
+  const rtg = require('url').parse(process.env.REDISTOGO_URL);
+  const redis = require('redis').createClient(rtg.port, rtg.hostname);
+  redis.auth(rtg.auth.split(':')[1]);
+  const gethAsync = promisify(redis.hgetall).bind(redis);
+} else {
+  const redis = require('redis').createClient();
+  const gethAsync = promisify(redis.hgetall).bind(redis);
+}
+
+// const gethAsync = promisify(redis.hgetall).bind(redis);
 
 const { PAYPAL_CONFIG } = require(appRoot + '/app/config/app.json');
 const asyncMiddleware = require(appRoot + '/app/helper/asyncMiddleware');
