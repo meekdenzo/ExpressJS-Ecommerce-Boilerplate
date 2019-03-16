@@ -20,10 +20,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": "admin",
-    "database": "tshirtshop",
-    "host": "127.0.0.1",
+    "username": "b929de7dfdf4f0",
+    "password": "21cf8d6f",
+    "database": "heroku_5a68c80e05d21f3",
+    "host": "us-cdbr-iron-east-03.cleardb.net",
     "dialect": "mysql",
     "operatorsAliases": false
   }
