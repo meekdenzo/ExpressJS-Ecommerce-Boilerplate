@@ -173,6 +173,6 @@ Install the dependencies and devDependencies and start the server.
 
 ```sh
 $ cd e-commerce
-$ npm install -d
-$ npm run server
+$ npm i
+$ npm start
 ```
