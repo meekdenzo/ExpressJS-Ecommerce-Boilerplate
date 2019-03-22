@@ -141,6 +141,20 @@ All GET Request support query
 - limit
 - offset
 
+## Redis Config
+the config is in app/routes/api/v1/shoppingcart.js
+
+````
+if (process.env.REDISTOGO_URL) {
+  const rtg = require('url').parse(process.env.REDISTOGO_URL);
+  const redis = require('redis').createClient(rtg.port, rtg.hostname);
+  redis.auth(rtg.auth.split(':')[1]);
+  const gethAsync = promisify(redis.hgetall).bind(redis);
+} else {
+  const redis = require('redis').createClient();
+  const gethAsync = promisify(redis.hgetall).bind(redis);
+}
+````
 ### Tech
 
 This project uses a number of open source projects to work properly:
