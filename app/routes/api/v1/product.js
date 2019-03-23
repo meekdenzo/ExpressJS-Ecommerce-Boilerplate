@@ -318,7 +318,7 @@ router.get(
 
     const review = await product.getReviews({
       attributes: ['review', 'rating', 'created_on'],
-      include: [{ model: Customer, attributes: ['name'] }],
+      include: [{ model: Customer, attributes: ['first_name'] }],
       limit: req.query.limit,
       offset: req.query.offset
     });
