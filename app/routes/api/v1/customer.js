@@ -178,7 +178,11 @@ router.get(
   }),
   asyncMiddleware(async (req, res) => {
     const customer = await req.user.getCustomer();
-    const shpping = await customer.getShippingRegion();
+    const address = await customer.getAddresses({ where: { primary_address: true } });
+
+    if (address.length == 0) return res.status(404).json({ message: 'NOTFOUND' });
+
+    const shpping = await address[0].getShippingRegion();
 
     res.status(200).json(shpping);
   })

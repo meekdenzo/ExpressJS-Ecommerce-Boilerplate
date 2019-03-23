@@ -412,7 +412,7 @@ router.get(
         }
 
         const [product, total] = await shoppingProduct(carts);
-        res.status(400).json(total);
+        res.status(400).json({ total: total });
       } else {
         let arr = [];
 
