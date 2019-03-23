@@ -26,76 +26,466 @@ T-shirt shopp is an e-commerce system which allows users to search, add items to
 
 Replace :id or :cartId placeholder with appropriate id
 
-Category
+## Category
 
-- (PUBLIC) GET https://tshirt-turing.herokuapp.com/api/v1/categories
-- (PUBLIC) GET https://tshirt-turing.herokuapp.com/api/v1/categories/1/products
-- (PUBLIC) GET https://tshirt-turing.herokuapp.com/api/v1/categories/department/:id
-- (PUBLIC) GET https://tshirt-turing.herokuapp.com/api/v1/categories/:id
-- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/categories
-- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/categories/:id
-- (PROTECTED) DELETE https://tshirt-turing.herokuapp.com/api/v1/categories/:id
+   
+### GET https://tshirt-turing.herokuapp.com/api/v1/categories
+   - Fetch all categories
+   - Public API
+   - Available query
+        - limit
+        - offset
+   - Response
+       - category_id
+       - description
+### GET https://tshirt-turing.herokuapp.com/api/v1/categories/1/products
+   - Fetch all product by categories
+   - Public API
+   - Param
+        - id
+   - Available query
+        - limit
+        - offset
+   - Response
+       - description
+       - name
+       - price
+       - discounted_price
+       - product_category
+            - category_id
+            - product_id
+### GET https://tshirt-turing.herokuapp.com/api/v1/categories/department/:id
+   - Fetch all categories by department
+   - Public
+   - Param
+        - id
+   - Available query
+        - limit
+        - offset
+   - Response
+       - category_id
+       - name
+### GET https://tshirt-turing.herokuapp.com/api/v1/categories/:id
+   - Fetch single category
+   - Public API
+   - Param
+        - id
+   - Available query
+        - limit
+        - offset
+   - Response
+       - description
+       - name
+### POST https://tshirt-turing.herokuapp.com/api/v1/categories
+   - Create category
+   - Private API
+   - Body 
+        - name
+        - description
+        - department_id
+   - Response
+       - "SUCCESS"
+### POST https://tshirt-turing.herokuapp.com/api/v1/categories/:id
+   - Update category
+   - Private API
+   - Param
+        - id
+   - Body 
+        - name
+        - description
+   - Response
+       - "SUCCESS"
+### DELETE https://tshirt-turing.herokuapp.com/api/v1/categories/:id
+   - Delete category
+   - Private API
+   - Param
+        - id
+   - Response
+       - "SUCCESS"
+## Customer
+### GET https://tshirt-turing.herokuapp.com/api/v1/customers/:id
+   - Fetch single customer
+   - Private API
+   - Param
+        - id
+   - Response
+       - customer_id
+       - first_name
+       - last_name
+       - credit_card
+       - user_id
+### GET https://tshirt-turing.herokuapp.com/api/v1/customers
+   - Fetch all customers
+   - Private API
+   - Response Array
+       - customer_id
+       - first_name
+       - last_name
+       - credit_card
+       - user_id
+### GET https://tshirt-turing.herokuapp.com/api/v1/customers/shippping/region
+   - Fetch customer shipping region
+   - Private API
+   - Response
+       - shipping_region_id
+       - shipping_region
+### POST https://tshirt-turing.herokuapp.com/api/v1/customers/update
+   - Update single customer
+   - Private API
+   - Body
+       - first_name
+       - last_name
+       - credit_card
+   - Response
+        - "SUCCESS"
+### POST https://tshirt-turing.herokuapp.com/api/v1/customers/address
+   - Update single customer address
+   - Private API
+   - Body
+       - eve_phone
+       - day_phone
+       - mob_phone
+       - address_1
+       - address_2
+       - city
+       - region
+       - postal_code
+       - shipping_region_id
+   - Response
+        - "SUCCESS"
+## Department
 
-Customer
+### GET https://tshirt-turing.herokuapp.com/api/v1/departments
+   - Fetch all departments
+   - Public API
+   - Response Array
+       - department_id
+       - name
+       - description
+### GET https://tshirt-turing.herokuapp.com/api/v1/departments/:id
+   - Fetch single department
+   - Public API
+   - Param
+       - id
+   - Response
+       - department_id
+       - name
+       - description
+### POST https://tshirt-turing.herokuapp.com/api/v1/departments
+   - Create department
+   - Private API
+   - body
+       - name
+       - description
+### POST https://tshirt-turing.herokuapp.com/api/v1/departments/:id
+   - Update department
+   - Private API
+   - Param
+       - id
+   - body
+       - name
+       - description
+### DELETE https://tshirt-turing.herokuapp.com/api/v1/departments/:id
+   - Delete department
+   - Private API
+   - Param
+       - id
+## Order
+### GET https://tshirt-turing.herokuapp.com/api/v1/orders/:id
+   - Fetch single order
+   - Private API
+   - Param
+       - id
+   - Response
+       - order_id
+       - total_amount
+       - created_on
+       - shipped_on
+       - comments
+       - status
+       - customer_id
+       - shipping_id
+       - shipping_type
+       - shipping_cost
+       - tax_id
+       - tax_type 
+       - tax_percentage
+### GET https://tshirt-turing.herokuapp.com/api/v1/orders/:id/details
+   - Fetch single order details
+   - Private API
+   - Param
+       - id
+   - Response
+       - attribute
+       - product_name
+       - quantity
+       - unit_cost
+       - order_id
+       - product_id
+### GET https://tshirt-turing.herokuapp.com/api/v1/orders/customer/:id
+   - Fetch single order by customer
+   - Private API
+   - Param
+       - id
+   - Response
+       - order_id
+       - total_amount
+       - created_on
+       - status
+       - customer_id
+### POST https://tshirt-turing.herokuapp.com/api/v1/orders/:id
+   - Update order
+   - Private API
+   - Param
+       - id
+   - body
+       - status
+       - comments
+       - auth_code
+       - reference
+       - message
+       - code
+### POST https://tshirt-turing.herokuapp.com/api/v1/orders/:id/shipped
+   - Create order shipped
+   - Private API
+   - Param
+       - id
+## Product
 
-- (PROTECTED) GET https://tshirt-turing.herokuapp.com/api/v1/customers/:id
-- (PROTECTED) GET https://tshirt-turing.herokuapp.com/api/v1/customers
-- (PROTECTED) GET https://tshirt-turing.herokuapp.com/api/v1/customers/shippping/region
-- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/customers/update
-- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/customers/address
+### GET https://tshirt-turing.herokuapp.com/api/v1/products/:id/attribute
+   - Fetch single product attributes
+   - Public API
+   - Param
+        - id
+   - Available query
+        - limit
+        - offset
+   - Response
+       - attribute_value_id
+       - attribute_id
+       - value
+### GET https://tshirt-turing.herokuapp.com/api/v1/products/:id/category
+   - Fetch single product category
+   - Public API
+   - Param
+        - id
+   - Available query
+        - limit
+        - offset
+   - Response
+       - name
+       - category_id
+       - department_id
+       - product_id
+### GET https://tshirt-turing.herokuapp.com/api/v1/products/:id
+   - Fetch single product
+   - Public API
+   - Param
+        - id
+   - Available query
+        - limit
+        - offset
+   - Response
+       - product_id
+       - name
+       - description
+       - discounted_price
+       - price
+       - image
+       - image_2
+       - thumbnail
+       - display
+### GET https://tshirt-turing.herokuapp.com/api/v1/products/:id/location
+   - Fetch single product location
+   - Public API
+   - Param
+        - id
+   - Available query
+        - limit
+        - offset
+   - Response
+       - department_id
+       - category_id
+       - name
+       - product_id
+### GET https://tshirt-turing.herokuapp.com/api/v1/products/:id/review
+   - Fetch single product review
+   - Public API
+   - Param
+        - id
+   - Available query
+        - limit
+        - offset
+   - Response
+       - review
+       - rating
+       - created_on
+       - first_name
+       - product_id
+### POST https://tshirt-turing.herokuapp.com/api/v1/products/:id/attribute
+   - Create product attribute
+   - Private API
+   - Param
+        - id
+   - Body
+       - attribute_value_id
+   - Response
+       - "SUCCESS"
+### POST https://tshirt-turing.herokuapp.com/api/v1/products/:id/category
+   - Create product category
+   - Private API
+   - Param
+        - id
+   - Body
+       - category_id
+   - Response
+       - "SUCCESS"
+### POST https://tshirt-turing.herokuapp.com/api/v1/products/:id/review
+   - Create product category
+   - Private API
+   - Param
+        - id
+   - Body
+       - review
+       - rating
+   - Response
+       - "SUCCESS"
+### DELETE https://tshirt-turing.herokuapp.com/api/v1/products/:id
+   - Create product category
+   - Private API
+   - Param
+        - id
+   - Response
+       - "SUCCESS"
+## Shoppingcart
 
-Department
-
-- (PUBLIC) GET https://tshirt-turing.herokuapp.com/api/v1/departments
-- (PUBLIC) GET https://tshirt-turing.herokuapp.com/api/v1/departments/:id
-- (PUBLIC) POST https://tshirt-turing.herokuapp.com/api/v1/departments
-- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/departments/:id
-- (PROTECTED) DELETE https://tshirt-turing.herokuapp.com/api/v1/departments/:id
-
-Order
-
-- (PROTECTED) GET https://tshirt-turing.herokuapp.com/api/v1/orders/:id
-- (PROTECTED) GET https://tshirt-turing.herokuapp.com/api/v1/orders/:id/details
-- (PROTECTED) https://tshirt-turing.herokuapp.com/api/v1/orders/customer/:id
-- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/orders/:id
-- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/orders/:id/shippped
-
-Product
-
-- (PUBLIC) GET https://tshirt-turing.herokuapp.com/api/v1/products/:id/attribute
-- (PUBLIC) GET https://tshirt-turing.herokuapp.com/api/v1/products/:id/category
-- (PUBLIC) GET https://tshirt-turing.herokuapp.com/api/v1/products/:id
-- (PUBLIC) GET https://tshirt-turing.herokuapp.com/api/v1/products/:id/location
-- (PUBLIC) GET https://tshirt-turing.herokuapp.com/api/v1/products/:id/review
-- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/products/:id/attribute
-- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/products/:id/category
-- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/products/:id/review
-- (PROTECTED) DELETE https://tshirt-turing.herokuapp.com/api/v1/products/:id
-
-Shoppingcart
-
-- (PROTECTED) GET https://tshirt-turing.herokuapp.com/api/v1/carts/:cartId/saved
-- (PROTECTED) GET https://tshirt-turing.herokuapp.com/api/v1/carts/:cartId/products
-- (PROTECTED) GET https://tshirt-turing.herokuapp.com/api/v1/carts/:cartId/amount
-- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/carts
-- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/carts/create-payment
-- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/carts/execute-payment
-
-User
-
-- (PROTECTED) GET https://tshirt-turing.herokuapp.com/api/v1/users/current
-- (PROTECTED) GET https://tshirt-turing.herokuapp.com/api/v1/users/:id
-- (PROTECTED) GET https://tshirt-turing.herokuapp.com/api/v1/users/facebook/callback
-- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/users/
-- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/users/signin
-- (PROTECTED) POST https://tshirt-turing.herokuapp.com/api/v1/users/update
-
+### GET https://tshirt-turing.herokuapp.com/api/v1/carts/:cartId/saved
+   - Fetch saved product in cart
+   - Private API
+   - Param
+        - id
+   - Response
+       - cart_id
+       - item_id
+       - attribute
+       - quantity
+       - products
+            - name
+            - price
+            - discounted_price
+### GET https://tshirt-turing.herokuapp.com/api/v1/carts/:cartId/products
+   - Fetch all product in cart
+   - Private API
+   - Param
+        - id
+   - Response
+       - cart_id
+       - item_id
+       - attribute
+       - quantity
+       - products
+            - product_id
+            - name
+            - price
+            - discounted_price
+### GET https://tshirt-turing.herokuapp.com/api/v1/carts/:cartId/amount
+   - Fetch the price of all product in cart
+   - Private API
+   - Param
+        - id
+   - Response
+        - total
+### POST https://tshirt-turing.herokuapp.com/api/v1/carts
+   - Create cart
+   - Private API
+   - Body
+       - cart_id
+       - product_id
+       - attribute
+   - Response
+       - "SUCCESS"
+### POST https://tshirt-turing.herokuapp.com/api/v1/carts/create-payment
+   - Create create payment for later execution
+   - Private API
+   - Body
+       - tax_id
+       - cart_id
+       - shipping_id
+   - Response
+       - id
+### POST https://tshirt-turing.herokuapp.com/api/v1/carts/execute-payment
+   - Execute payment
+   - Private API
+   - Body
+       - tax_id
+       - cart_id
+       - shipping_id
+       - paymentID
+       - payerID
+   - Response
+       - "SUCESS"
+## User
+### GET https://tshirt-turing.herokuapp.com/api/v1/users/current
+   - Fetch current loggedin user
+   - Private API
+   - Response
+       - user_id
+       - email
+       - password
+       - facebook_access_token
+       - role
+### GET https://tshirt-turing.herokuapp.com/api/v1/users/:id
+   - Fetch single user
+   - Private API
+   - Param
+       - id
+   - Response
+       - user_id
+       - email
+       - password
+       - facebook_access_token
+       - role
+### GET https://tshirt-turing.herokuapp.com/api/v1/users/facebook/callback
+   - Callback facebook
+   - Private API
+### POST https://tshirt-turing.herokuapp.com/api/v1/users/
+   - Create user
+   - Public API
+   - Body
+       - first_name
+       - last_name
+       - email
+       - password
+       - password_confirmation
+   - Response
+       - "SUCCESS"
+### POST https://tshirt-turing.herokuapp.com/api/v1/users/signin
+   - Singin user
+   - Public API
+   - Body
+       - email
+       - password
+   - Response
+       - token
+### POST https://tshirt-turing.herokuapp.com/api/v1/users/update
+   - Update user
+   - Private API
+   - Body
+       - email
+       - password
+       - password_confirmation
+   - Response
+       - "SUCCESS"
 ## Response Structure
 
 - SUCCESS FETCH return data with header status 200 `{ data: }`
 - SUCCESS UPDATE, CREATE or DELETE return json with with header status 422 `{message: 'SUCCESS'}`
 - ERROR FETCH return json with header status 404 `{message: 'NOTFOUND' }`
-- ERROR CREATE or UPDATE return json with header status 422 `{ "errors": [ { "location": "body", "param": "name", "msg": "Name is a required field." } ] }`
+- ERROR CREATE or UPDATE return json with header status 422 
+    - Errors
+        - location
+        - param
+        - msg
 - ERROR unauthorized user return `Unauthorized` string
 
 ## Authentication
