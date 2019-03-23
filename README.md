@@ -524,6 +524,13 @@ Response from server
 
 `{ "success": true, "token": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImNvZGVuaW5qYTB4MDFAZ21haWwuY29tIiwiaWF0IjoxNTUyNzU4NTc4LCJleHAiOjE1NTI3NjIxNzh9.tABe3TaV1TmnZ9ol3LDo18CcDwPLQsbOyDJ1A-Zk3WU" }`
 
+## Access To Secure Routes
+Set Header Authorization to token return from server
+```
+Authorization : Bearer {token}
+
+```
+
 ## Pagination
 
 All GET Request support query
