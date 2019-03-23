@@ -28,6 +28,10 @@ Replace :id or :cartId placeholder with appropriate id
 
 ## Category
 
+<<<<<<< HEAD
+=======
+   
+>>>>>>> ed2348e0d5cd4b3aef4337ca8e92b49d6ae217e4
 ### GET https://tshirt-turing.herokuapp.com/api/v1/categories
    - Fetch all categories
    - Public API
