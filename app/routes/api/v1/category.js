@@ -220,6 +220,7 @@ router.delete(
       });
     }
 
+    // if the category associate with any product it wont delete
     const count = await Category.count({
       where: { category_id: req.params.id },
       include: [{ model: Product, as: 'products' }]

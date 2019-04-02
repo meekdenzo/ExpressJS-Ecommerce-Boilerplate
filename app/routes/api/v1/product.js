@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const appRoot = require('app-root-path');
 const passport = require('passport');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 const asyncMiddleware = require(appRoot + '/app/helper/asyncMiddleware');
 const model = require(appRoot + '/app/database/models');
@@ -13,7 +15,7 @@ const Review = model.review;
 
 const { valCreateProduct, valAttribute, valCategory, valReview } = require(appRoot +
   '/app/validation/product');
-const { valQuery, valParam } = require(appRoot + '/app/validation/common');
+const { valQuery, valParam, valSearch } = require(appRoot + '/app/validation/common');
 const { validationResult } = require('express-validator/check');
 
 /*
@@ -116,6 +118,38 @@ router.post(
 
     await product.addCategories(category_id);
     res.status(200).json({ message: 'SUCCESS' });
+  })
+);
+/*
+ @access    Private
+ @route     POST api/v1/products/search
+ @desc      Search Products
+*/
+router.post(
+  '/search',
+  valSearch,
+  asyncMiddleware(async (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
+    const { str } = req.query;
+
+    const products = await Product.findAndCountAll({
+      where: {
+        name: {
+          [Op.like]: `${str}%`
+        }
+      }
+    });
+
+    if (!products) {
+      return res.status(404).json({ message: 'NOTFOUND' });
+    }
+
+    res.status(200).json(products);
   })
 );
 /*

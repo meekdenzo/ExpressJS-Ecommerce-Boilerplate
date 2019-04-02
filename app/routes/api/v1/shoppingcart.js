@@ -4,15 +4,17 @@ const appRoot = require('app-root-path');
 const passport = require('passport');
 const request = require('request-promise');
 const { promisify } = require('util');
+let redis;
+let gethAsync;
 
 if (process.env.REDISTOGO_URL) {
   const rtg = require('url').parse(process.env.REDISTOGO_URL);
-  const redis = require('redis').createClient(rtg.port, rtg.hostname);
+  redis = require('redis').createClient(rtg.port, rtg.hostname);
   redis.auth(rtg.auth.split(':')[1]);
-  const gethAsync = promisify(redis.hgetall).bind(redis);
+  gethAsync = promisify(redis.hgetall).bind(redis);
 } else {
-  const redis = require('redis').createClient();
-  const gethAsync = promisify(redis.hgetall).bind(redis);
+  redis = require('redis').createClient();
+  gethAsync = promisify(redis.hgetall).bind(redis);
 }
 
 // const gethAsync = promisify(redis.hgetall).bind(redis);
@@ -100,7 +102,7 @@ router.post(
     }
 
     // Add to redis database
-    client.hset(`carts:products:${cart_id}`, product_id, JSON.stringify(product));
+    redis.hset(`carts:products:${cart_id}`, product_id, JSON.stringify(product));
 
     res.status(200).json({ message: 'SUCCESS' });
   })
@@ -226,7 +228,7 @@ router.post(
     const address = await customer.getAddresses({ where: { primary_address: true }, limit: 1 });
 
     const paypalAddress =
-      address != null
+      address.length > 0
         ? {
             recipient_name: customer.getName(),
             line1: address[0].address_1,
@@ -325,7 +327,7 @@ router.get(
   asyncMiddleware(async (req, res) => {
     const { id } = req.params;
 
-    client.hgetall(`carts:products:${id}`, async (err, rep) => {
+    redis.hgetall(`carts:products:${id}`, async (err, rep) => {
       if (!rep) {
         const carts = await ShoppingCart.findAll({
           where: { cart_id: id, buy_now: false },
@@ -343,7 +345,7 @@ router.get(
         const [products, total] = await shoppingProduct(carts);
         carts.forEach(async cart => {
           const product_id = await cart.product.product_id;
-          await client.hset(`carts:products:${req.params.id}`, product_id, JSON.stringify(cart));
+          await redis.hset(`carts:products:${req.params.id}`, product_id, JSON.stringify(cart));
         });
 
         res.status(200).json(products);
@@ -372,7 +374,7 @@ router.get(
   }),
   valParam,
   asyncMiddleware(async (req, res) => {
-    client.hget('carts:saved', req.params.id, async (err, rep) => {
+    redis.hget('carts:saved', req.params.id, async (err, rep) => {
       if (!rep) {
         const carts = await ShoppingCart.findAll({
           where: { cart_id: req.params.id, buy_now: false },
@@ -384,7 +386,7 @@ router.get(
           return res.status(400).json({ message: 'NOTFOUND' });
         }
 
-        client.hset('carts:saved', req.params.id, JSON.stringify(carts));
+        redis.hset('carts:saved', req.params.id, JSON.stringify(carts));
         res.status(200).json(carts);
       } else {
         res.status(200).json(JSON.parse(rep));
@@ -400,7 +402,7 @@ router.get(
 router.get(
   '/:id/amount',
   asyncMiddleware(async (req, res) => {
-    client.hgetall(`carts:products:${req.params.id}`, async (err, data) => {
+    redis.hgetall(`carts:products:${req.params.id}`, async (err, data) => {
       if (!res) {
         const carts = await ShoppingCart.findAll({
           where: { cart_id: req.params.id },
@@ -436,9 +438,9 @@ router.delete(
   valParam,
   asyncMiddleware(async (req, res) => {
     const cart = await ShoppingCart.destroy({ where: { item_id: req.params.id } });
-    if (!cart) {
-      return res.status(400).json({ message: 'NOTFOUND' });
-    }
+    // if (!cart) {
+    //   return res.status(400).json({ message: 'NOTFOUND' });
+    // }
     res.status(200).json({ message: 'SUCCESS' });
   })
 );

@@ -18,5 +18,11 @@ module.exports = {
       .toInt()
       .isInt({ gt: 0 })
       .withMessage('Invalid query provided')
+  ],
+  valSearch: [
+    query('str')
+      .optional()
+      .toString()
+      .withMessage('Invalid query provided')
   ]
 };

@@ -65,13 +65,19 @@ module.exports = {
     check('region')
       .escape()
       .isLength({
-        min: 5
+        min: 2
       })
       .withMessage('Region field is invalid.'),
+    check('country')
+      .escape()
+      .isLength({
+        min: 2
+      })
+      .withMessage('Country field is invalid.'),
     check('postal_code')
       .escape()
       .isLength({
-        min: 4
+        min: 2
       })
       .withMessage('Postal Code field is invalid.'),
     check('shipping_region_id')
