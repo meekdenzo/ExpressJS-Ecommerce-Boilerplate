@@ -1,4 +1,4 @@
-# E-commerce-Turing
+# E-commerce
 
 T-shirt shopp is an e-commerce system which allows users to search, add items to their shopping cart, create order and checkout successfully.
 
