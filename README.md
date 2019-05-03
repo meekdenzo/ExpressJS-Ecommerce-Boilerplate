@@ -20,7 +20,6 @@ T-shirt shopp is an e-commerce system which allows users to search, add items to
 - I use redis to catch customer shopping cart
 - Users auth using JWT token based
 - Use winston for Logging the app
-- Hosted on heroku (https://tshirt-turing.herokuapp.com)
 
 
 ## Response Structure
