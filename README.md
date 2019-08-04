@@ -1,6 +1,6 @@
 # E-commerce
 
-T-shirt shopp is an e-commerce system which allows users to search, add items to their shopping cart, create order and checkout successfully.
+This project allows users to search, add items to their shopping cart, create order and checkout successfully.
 
 - Admin can create product and assign category to it
 - Admin can create product, category and product department
